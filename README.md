@@ -1,4 +1,4 @@
-# Simple-Analog-Filter-Analysis-with-Python
+# Simple Analog Filter Simulator with Python
 Simulate First order or Second order Analog Filters with **Python**.
 
 ## Installation:
