@@ -184,4 +184,4 @@ def bandpass(T_m, w_0, m):
     #Display all
     plt.show()
 
-bandpass(10, 2000, 2)
+#bandpass(10, 2000, 2)
