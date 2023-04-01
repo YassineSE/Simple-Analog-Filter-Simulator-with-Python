@@ -1,12 +1,11 @@
 import tkinter as tk
 import webbrowser
 import freq_resp
+import time_resp
 from PIL import ImageTk, Image
 
 def github():
     webbrowser.open("https://github.com/YassineSE/Simple-Analog-Filter-Simulator-with-Python")
-
-
 
 def plus_info():
     info_window = tk.Toplevel(app)
@@ -15,7 +14,6 @@ def plus_info():
     date = tk.Label(info_window, text="Mars 2023")
     date.pack()
 
-
 def second_order_hp():
 
     def gen_freq_resp():
@@ -23,6 +21,18 @@ def second_order_hp():
         w_0 = float(w_0_entry.get())
         m = float(m_entry.get())
         freq_resp.highpass_2(T_inf,w_0,m)
+    def gen_step_resp():
+        T_inf = float(T_inf_entry.get())
+        w_0 = float(w_0_entry.get())
+        m = float(m_entry.get())
+        time_resp.highpass_step_2(T_inf,w_0,m)
+    def gen_impulse_resp():
+        T_inf = float(T_inf_entry.get())
+        w_0 = float(w_0_entry.get())
+        m = float(m_entry.get())
+        time_resp.highpass_impulse_2(T_inf,w_0,m)
+
+
 
     hp2_app = tk.Toplevel(app)
     hp2_app.title("High Pass Second Order Analog Filter Simulator")
@@ -53,18 +63,20 @@ def second_order_hp():
     image = tk.Label(frame, image = img)
 
     freq_button = tk.Button(hp2_app, text="Generate Frequency Response", borderwidth=5, command=gen_freq_resp)
-    time_button = tk.Button(hp2_app, text="Generate Time Response", borderwidth=5)
+    step_button = tk.Button(hp2_app, text="Generate Step Response", borderwidth=5, command=gen_step_resp)
+    impulse_button = tk.Button(hp2_app, text="Generate Impulse Response", borderwidth=5, command=gen_impulse_resp)
     
     image.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
     tmodel.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
-    T_inf_label.place(relx=0.4, rely=0.5, anchor=tk.CENTER)
-    T_inf_entry.place(relx=0.6, rely=0.5, anchor=tk.CENTER)
-    w_0_label.place(relx=0.4, rely=0.6, anchor=tk.CENTER)
-    w_0_entry.place(relx=0.6, rely=0.6, anchor=tk.CENTER)
-    m_label.place(relx=0.4, rely=0.7, anchor=tk.CENTER)
-    m_entry.place(relx=0.6, rely=0.7, anchor=tk.CENTER)
-    freq_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
-    time_button.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
+    T_inf_label.place(relx=0.4, rely=0.45, anchor=tk.CENTER)
+    T_inf_entry.place(relx=0.6, rely=0.45, anchor=tk.CENTER)
+    w_0_label.place(relx=0.4, rely=0.55, anchor=tk.CENTER)
+    w_0_entry.place(relx=0.6, rely=0.55, anchor=tk.CENTER)
+    m_label.place(relx=0.4, rely=0.65, anchor=tk.CENTER)
+    m_entry.place(relx=0.6, rely=0.65, anchor=tk.CENTER)
+    freq_button.place(relx=0.5, rely=0.75, anchor=tk.CENTER)
+    step_button.place(relx=0.5, rely=0.85, anchor=tk.CENTER)
+    impulse_button.place(relx=0.5, rely=0.95, anchor=tk.CENTER)
     hp2_app.mainloop()
 
 def second_order_lp():
@@ -74,7 +86,16 @@ def second_order_lp():
         w_0 = float(w_0_entry.get())
         m = float(m_entry.get())
         freq_resp.lowpass_2(T_0,w_0,m)
-
+    def gen_step_resp():
+        T_0 = float(T_0_entry.get())
+        w_0 = float(w_0_entry.get())
+        m = float(m_entry.get())
+        time_resp.lowpass_step_2(T_0,w_0,m)
+    def gen_impulse_resp():
+        T_0 = float(T_0_entry.get())
+        w_0 = float(w_0_entry.get())
+        m = float(m_entry.get())
+        time_resp.lowpass_impulse_2(T_0,w_0,m)
     hp2_app = tk.Toplevel(app)
     hp2_app.title("Low Pass Second Order Analog Filter Simulator")
     hp2_app.geometry("600x400")
@@ -104,18 +125,20 @@ def second_order_lp():
     image = tk.Label(frame, image = img)
 
     freq_button = tk.Button(hp2_app, text="Generate Frequency Response", borderwidth=5, command=gen_freq_resp)
-    time_button = tk.Button(hp2_app, text="Generate Time Response", borderwidth=5)
-    
+    step_button = tk.Button(hp2_app, text="Generate Step Response", borderwidth=5, command=gen_step_resp)
+    impulse_button = tk.Button(hp2_app, text="Generate Time Response", borderwidth=5, command=gen_impulse_resp)
+
     image.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
     tmodel.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
-    T_0_label.place(relx=0.4, rely=0.5, anchor=tk.CENTER)
-    T_0_entry.place(relx=0.6, rely=0.5, anchor=tk.CENTER)
-    w_0_label.place(relx=0.4, rely=0.6, anchor=tk.CENTER)
-    w_0_entry.place(relx=0.6, rely=0.6, anchor=tk.CENTER)
-    m_label.place(relx=0.4, rely=0.7, anchor=tk.CENTER)
-    m_entry.place(relx=0.6, rely=0.7, anchor=tk.CENTER)
-    freq_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
-    time_button.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
+    T_0_label.place(relx=0.4, rely=0.45, anchor=tk.CENTER)
+    T_0_entry.place(relx=0.6, rely=0.45, anchor=tk.CENTER)
+    w_0_label.place(relx=0.4, rely=0.55, anchor=tk.CENTER)
+    w_0_entry.place(relx=0.6, rely=0.55, anchor=tk.CENTER)
+    m_label.place(relx=0.4, rely=0.65, anchor=tk.CENTER)
+    m_entry.place(relx=0.6, rely=0.65, anchor=tk.CENTER)
+    freq_button.place(relx=0.5, rely=0.75, anchor=tk.CENTER)
+    step_button.place(relx=0.5, rely=0.85, anchor=tk.CENTER)
+    impulse_button.place(relx=0.5, rely=0.95, anchor=tk.CENTER)
     hp2_app.mainloop()
 
 def second_order_bp():
@@ -124,8 +147,17 @@ def second_order_bp():
         T_m = float(T_m_entry.get())
         w_0 = float(w_0_entry.get())
         m = float(m_entry.get())
-        freq_resp.bandpass(T_m,w_0,m)
-
+        freq_resp.bandpass_2(T_m,w_0,m)
+    def gen_step_resp():
+        T_m = float(T_m_entry.get())
+        w_0 = float(w_0_entry.get())
+        m = float(m_entry.get())
+        time_resp.bandpass_step_2(T_m,w_0,m)
+    def gen_impulse_resp():
+        T_m = float(T_m_entry.get())
+        w_0 = float(w_0_entry.get())
+        m = float(m_entry.get())
+        time_resp.bandpass_impulse_2(T_m,w_0,m)
     hp2_app = tk.Toplevel(app)
     hp2_app.title("Band Pass Second Order Analog Filter Simulator")
     hp2_app.geometry("600x400")
@@ -155,18 +187,20 @@ def second_order_bp():
     image = tk.Label(frame, image = img)
 
     freq_button = tk.Button(hp2_app, text="Generate Frequency Response", borderwidth=5, command=gen_freq_resp)
-    time_button = tk.Button(hp2_app, text="Generate Time Response", borderwidth=5)
+    step_button = tk.Button(hp2_app, text="Generate Step Response", borderwidth=5, command=gen_step_resp)
+    impulse_button = tk.Button(hp2_app, text="Generate Impulse Response", borderwidth=5, command=gen_impulse_resp)
     
     image.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
     tmodel.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
-    T_m_label.place(relx=0.4, rely=0.5, anchor=tk.CENTER)
-    T_m_entry.place(relx=0.6, rely=0.5, anchor=tk.CENTER)
-    w_0_label.place(relx=0.4, rely=0.6, anchor=tk.CENTER)
-    w_0_entry.place(relx=0.6, rely=0.6, anchor=tk.CENTER)
-    m_label.place(relx=0.4, rely=0.7, anchor=tk.CENTER)
-    m_entry.place(relx=0.6, rely=0.7, anchor=tk.CENTER)
-    freq_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
-    time_button.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
+    T_m_label.place(relx=0.4, rely=0.45, anchor=tk.CENTER)
+    T_m_entry.place(relx=0.6, rely=0.45, anchor=tk.CENTER)
+    w_0_label.place(relx=0.4, rely=0.55, anchor=tk.CENTER)
+    w_0_entry.place(relx=0.6, rely=0.55, anchor=tk.CENTER)
+    m_label.place(relx=0.4, rely=0.65, anchor=tk.CENTER)
+    m_entry.place(relx=0.6, rely=0.65, anchor=tk.CENTER)
+    freq_button.place(relx=0.5, rely=0.75, anchor=tk.CENTER)
+    step_button.place(relx=0.5, rely=0.85, anchor=tk.CENTER)
+    impulse_button.place(relx=0.5, rely=0.95, anchor=tk.CENTER)
     hp2_app.mainloop()
 
 def second_order_select():
@@ -193,7 +227,16 @@ def first_order_hp():
         T_inf = float(T_inf_entry.get())
         w_0 = float(w_0_entry.get())
         freq_resp.highpass_1(T_inf,w_0)
-
+    def gen_step_resp():
+        T_inf = float(T_inf_entry.get())
+        w_0 = float(w_0_entry.get())
+        time_resp.highpass_step_1(T_inf,w_0)
+    
+    def gen_impulse_resp():
+        T_inf = float(T_inf_entry.get())
+        w_0 = float(w_0_entry.get())
+        time_resp.highpass_impulse_1(T_inf,w_0)
+    
     hp1_app = tk.Toplevel(app)
     hp1_app.title("High Pass First Order Analog Filter Simulator")
     hp1_app.geometry("600x400")
@@ -220,7 +263,8 @@ def first_order_hp():
     image = tk.Label(frame, image = img)
 
     freq_button = tk.Button(hp1_app, text="Generate Frequency Response", borderwidth=5, command=gen_freq_resp)
-    time_button = tk.Button(hp1_app, text="Generate Time Response", borderwidth=5)
+    step_button = tk.Button(hp1_app, text="Generate Step Response", borderwidth=5, command=gen_step_resp)
+    impulse_button = tk.Button(hp1_app, text="Generate Impulse Response", borderwidth=5, command=gen_impulse_resp)
     
     image.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
     tmodel.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
@@ -228,8 +272,9 @@ def first_order_hp():
     T_inf_entry.place(relx=0.6, rely=0.5, anchor=tk.CENTER)
     w_0_label.place(relx=0.4, rely=0.6, anchor=tk.CENTER)
     w_0_entry.place(relx=0.6, rely=0.6, anchor=tk.CENTER)
-    freq_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
-    time_button.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
+    freq_button.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
+    step_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
+    impulse_button.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
     hp1_app.mainloop()
 
 
@@ -239,6 +284,16 @@ def first_order_lp():
         T_0 = float(T_0_entry.get())
         w_0 = float(w_0_entry.get())
         freq_resp.lowpass_1(T_0,w_0)
+
+    def gen_step_resp():
+        T_0 = float(T_0_entry.get())
+        w_0 = float(w_0_entry.get())
+        time_resp.lowpass_step_1(T_0,w_0)
+    
+    def gen_impulse_resp():
+        T_0 = float(T_0_entry.get())
+        w_0 = float(w_0_entry.get())
+        time_resp.lowpass_impulse_1(T_0,w_0)
 
     hp1_app = tk.Toplevel(app)
     hp1_app.title("Low Pass First Order Analog Filter Simulator")
@@ -266,19 +321,19 @@ def first_order_lp():
     image = tk.Label(frame, image = img)
 
     freq_button = tk.Button(hp1_app, text="Generate Frequency Response", borderwidth=5, command=gen_freq_resp)
-    time_button = tk.Button(hp1_app, text="Generate Time Response", borderwidth=5)
-    
+    step_button = tk.Button(hp1_app, text="Generate Step Response", borderwidth=5, command=gen_step_resp)
+    impulse_button = tk.Button(hp1_app, text="Generate Impulse Response",borderwidth=5, command=gen_impulse_resp)
+
     image.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
     tmodel.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
     T_0_label.place(relx=0.4, rely=0.5, anchor=tk.CENTER)
     T_0_entry.place(relx=0.6, rely=0.5, anchor=tk.CENTER)
     w_0_label.place(relx=0.4, rely=0.6, anchor=tk.CENTER)
     w_0_entry.place(relx=0.6, rely=0.6, anchor=tk.CENTER)
-    freq_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
-    time_button.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
+    freq_button.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
+    step_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
+    impulse_button.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
     hp1_app.mainloop()
-
-
 
 
 def first_order_select():

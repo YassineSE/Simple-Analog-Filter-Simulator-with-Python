@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.signal as sig
 
+
+####SECOND ORDER#####
 def highpass_2(T_inf, w_0, m):
 
     #num and den of Transfer Function
@@ -61,9 +63,6 @@ def highpass_2(T_inf, w_0, m):
     plt.subplots_adjust(hspace=0.6)
     #Display all
     plt.show()
-
-
-
 
 def lowpass_2(T_0, w_0, m):
     #num and den of Transfer Function
@@ -126,7 +125,8 @@ def lowpass_2(T_0, w_0, m):
 
 def bandpass_2(T_m, w_0, m):
     #num and den of Transfer Function
-    num = np.array([0,(2*T_m*m)/w_0,0])
+    T_i = 2*m*T_m
+    num = np.array([0,(T_i)/w_0,0])
     den = np.array([1/w_0**2, 2*m/w_0, 1])
     
     #Create Transfer function
@@ -143,9 +143,9 @@ def bandpass_2(T_m, w_0, m):
     #Create the asymptotes
     H=T_m  * np.ones(f.shape,dtype=complex) #matrice de 1
     i=np.nonzero(w>=w_0)
-    H[i]= np.abs(T_m)*(1/w_0)**-1 * (1j*w[i])**-1
+    H[i]= np.abs(T_i)*(1/w_0)**-1 * (1j*w[i])**-1
     i=np.nonzero(w<=w_0)
-    H[i]= np.abs(T_m)*(1/w_0) * (1j*w[i])
+    H[i]= np.abs(T_i)*(1/w_0) * (1j*w[i])
     ##Big Title##
     plt.suptitle('$T_m$ = {T_m}, $\omega_0$ = {w_0}, m = {m}'.format(T_m = T_m, w_0 = w_0, m = m), fontsize=14, fontweight='bold')
     #######Create Magnitude Subplot#####
@@ -184,8 +184,8 @@ def bandpass_2(T_m, w_0, m):
     #Display all
     plt.show()
 
-#bandpass(10, 2000, 2)
 
+######FIRST ORDER#####
 def lowpass_1(T_0, w_0):
     num=np.array([T_0])
     den=np.array([1/w_0,1])           # array = tableau numpy (les opérations standard sont définies dessus ...)
@@ -242,7 +242,6 @@ def lowpass_1(T_0, w_0):
     plt.subplots_adjust(hspace=0.6)
     #Display all
     plt.show()
-
 
 def highpass_1(T_inf, w_0):
     num=np.array([T_inf/w_0,0])
