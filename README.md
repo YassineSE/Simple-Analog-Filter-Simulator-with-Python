@@ -6,6 +6,7 @@ Simulate First order or Second order Analog Filters with **Python**.
 1. Install the following python libraries:
   * webbrowser
   * PIL
+  * tkinter
   
 ## Usage
 If the installation is done correctly, launch the **main.py** file.
