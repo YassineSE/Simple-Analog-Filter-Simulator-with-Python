@@ -160,7 +160,7 @@ def bandpass_step_2(T_m,w_0,m):
     x = sig.TransferFunction(num,den)
     T1 = sig.lti(num,den)
     t, y = sig.step(T1)
-    plt.axhline(y = T_m, color = 'purple', label = '$T_0$', linestyle="dashed")
+    plt.axhline(y = T_m, color = 'purple', label = '$T_m$', linestyle="dashed")
     plt.title('Step response for a Second Order Bandpass Filter')
     plt.suptitle('$T_m$ = {T_m}, $\omega_0$ = {w_0}, m = {m}'.format(T_m = T_m, w_0 = w_0, m=m), fontsize=14, fontweight='bold')
     plt.xlabel('Time [s]')
@@ -178,7 +178,7 @@ def bandpass_impulse_2(T_m,w_0,m):
     x = sig.TransferFunction(num,den)
     T1 = sig.lti(num,den)
     t, y = sig.impulse(T1)
-    plt.axhline(y = T_m, color = 'purple', label = '$T_0$', linestyle="dashed")
+    plt.axhline(y = T_m, color = 'purple', label = '$T_m$', linestyle="dashed")
     plt.title('Impulse response for a Second Order Bandpass Filter')
     plt.suptitle('$T_m$ = {T_m}, $\omega_0$ = {w_0}, m = {m}'.format(T_m = T_m, w_0 = w_0, m=m), fontsize=14, fontweight='bold')
     plt.xlabel('Time [s]')
@@ -188,3 +188,38 @@ def bandpass_impulse_2(T_m,w_0,m):
     plt.plot(t,y)
     plt.show()
 
+####NOTCH####
+##STEP##
+def notch_step_2(T_0,w_0,m):
+    num = np.array([T_0*(1/((w_0)**2)), 0, T_0])
+    den = np.array([1/w_0**2, 2*m/w_0, 1])
+
+    x = sig.TransferFunction(num,den)
+    T1 = sig.lti(num,den)
+    t, y = sig.step(T1)
+    plt.axhline(y = T_0, color = 'purple', label = '$T_0$', linestyle="dashed")
+    plt.title('Step response for a Second Order Band-Stop Filter')
+    plt.suptitle('$T_0$ = {T_0}, $\omega_0$ = {w_0}, m = {m}'.format(T_0 = T_0, w_0 = w_0, m=m), fontsize=14, fontweight='bold')
+    plt.xlabel('Time [s]')
+    plt.ylabel('Voltage [V]')
+    plt.legend()
+    plt.grid()
+    plt.plot(t,y)
+    plt.show()
+##IMPULSE##
+#Create Transfer function
+def notch_impulse_2(T_0,w_0,m):
+    num = np.array([T_0*(1/((w_0)**2)), 0, T_0])
+    den = np.array([1/w_0**2, 2*m/w_0, 1])
+    x = sig.TransferFunction(num,den)
+    T1 = sig.lti(num,den)
+    t, y = sig.impulse(T1)
+    plt.axhline(y = T_0, color = 'purple', label = '$T_0$', linestyle="dashed")
+    plt.title('Impulse response for a Second Order Band-Stop Filter')
+    plt.suptitle('$T_0$ = {T_0}, $\omega_0$ = {w_0}, m = {m}'.format(T_0 = T_0, w_0 = w_0, m=m), fontsize=14, fontweight='bold')
+    plt.xlabel('Time [s]')
+    plt.ylabel('Voltage [V]')
+    plt.legend()
+    plt.grid()
+    plt.plot(t,y)
+    plt.show()

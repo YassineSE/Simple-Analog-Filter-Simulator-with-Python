@@ -184,6 +184,66 @@ def bandpass_2(T_m, w_0, m):
     #Display all
     plt.show()
 
+def notch_2(T_0, w_0, m):
+    num = np.array([T_0*(1/((w_0)**2)), 0, T_0])
+    den = np.array([1/w_0**2, 2*m/w_0, 1])
+
+    
+    #Create Transfer function
+    x = sig.TransferFunction(num,den)
+    T1 = sig.lti(num,den)
+
+    #Create X axis
+    f=10**np.linspace(0,6,200)
+    w=2*np.pi*f
+    
+    #Frequency response
+    w,Tjw=sig.freqresp(T1, w)
+    '''
+    #Create the asymptotes
+    H=T_0 * np.ones(f.shape,dtype=complex) #matrice de 1
+    i=np.nonzero(w>=w_0)
+    H[i]= np.abs(T_i)*(1/w_0)**-1 * (1j*w[i])**-1
+    i=np.nonzero(w<=w_0)
+    H[i]= np.abs(T_i)*(1/w_0) * (1j*w[i])
+    '''
+    ##Big Title##
+    plt.suptitle('$T_0$ = {T_0}, $\omega_0$ = {w_0}, m = {m}'.format(T_0 = T_0,w_0 = w_0, m = m), fontsize=14, fontweight='bold')
+    #######Create Magnitude Subplot#####
+    plt.subplot(211)
+    plt.grid(True)  
+
+    #Draw the cutoff frequency line
+    plt.axvline(x = w_0, color = 'green', label = '$\omega_0$', linestyle="dashed")
+    
+    #Draw T_0
+    plt.axhline(y = T_0, color = 'purple', label = '$T_0$', linestyle="dashed")
+
+    #Draw the Magnitude
+    plt.loglog(w,abs(Tjw),label="Magnitude",color = "b")
+    #Draw The Magnitude Asymptote
+    #plt.loglog(w, abs(H), label = "Asymptote", color = "blue")
+    #Draw the labels and axis
+    plt.xlabel('$\omega$ [Rad.$s^{-1}$]')
+    plt.ylabel('|T(j$\omega$)|');plt.title('Magnitude');plt.legend()
+    
+
+    #####Create the Phase subplot#####    
+    plt.subplot(212)
+    plt.grid(True)
+
+    #Draw the Phase
+    plt.semilogx(w,180/np.pi*np.angle(Tjw), color="b", label="Phase")
+    #Draw the phase asymptote
+    #plt.semilogx(w,180/np.pi*np.angle(H),label='Asymptote', color="blue")
+    #Draw the labels and axis
+    plt.title("Phase")
+    plt.xlabel('$\omega$ [Rad.$s^{-1}$]');plt.ylabel('arg(T($j\omega$))');plt.legend()
+    
+    #Horizontal space between subplots
+    plt.subplots_adjust(hspace=0.6)
+    #Display all
+    plt.show() 
 
 ######FIRST ORDER#####
 def lowpass_1(T_0, w_0):
@@ -299,3 +359,4 @@ def highpass_1(T_inf, w_0):
     plt.subplots_adjust(hspace=0.6)
     #Display all
     plt.show()
+
