@@ -126,7 +126,7 @@ def second_order_lp():
 
     freq_button = tk.Button(hp2_app, text="Generate Frequency Response", borderwidth=5, command=gen_freq_resp)
     step_button = tk.Button(hp2_app, text="Generate Step Response", borderwidth=5, command=gen_step_resp)
-    impulse_button = tk.Button(hp2_app, text="Generate Time Response", borderwidth=5, command=gen_impulse_resp)
+    impulse_button = tk.Button(hp2_app, text="Generate Impulse Response", borderwidth=5, command=gen_impulse_resp)
 
     image.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
     tmodel.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
